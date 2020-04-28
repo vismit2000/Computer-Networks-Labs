@@ -45,10 +45,10 @@ Write client and server programs to upload a given file (“input.txt”) from c
     - Data structure used for select: `fd_set`. It contains the list of file descriptors to monitor for some activity. There are four functions associated with fd_set:
         
         ```
-        int FD_ZERO (fd_set *descriptorVector);                     /* removes all descriptors from vector */
-        int FD_CLR (int descriptor, fd_set *descriptorVector);      /* remove descriptor from vector */
-        int FD_SET (int descriptor, fd_set *descriptorVector);      /* add descriptor to vector */
-        int FD_ISSET (int descriptor, fd_set *descriptorVector);    /* vector membership check */
+        int FD_ZERO (fd_set *descriptorVector);                   /* removes all descriptors from vector */
+        int FD_CLR (int descriptor, fd_set *descriptorVector);    /* remove descriptor from vector */
+        int FD_SET (int descriptor, fd_set *descriptorVector);    /* add descriptor to vector */
+        int FD_ISSET (int descriptor, fd_set *descriptorVector);  /* vector membership check */
         ```
 
     - Created a fd_set variable `readfds`, which will monitor all the active file descriptors of the clients plus that of the main server 
