@@ -1,6 +1,6 @@
-# Problem-1: File transfer using multi-channel stop-and-wait protocol
+## Problem-1: File transfer using multi-channel stop-and-wait protocol
 
-## Problem Statement
+### Problem Statement
 
 Write client and server programs to upload a given file (“input.txt”) from client to the server using the given protocol by making **TCP** connections between the client and the server:
 
@@ -9,7 +9,7 @@ Write client and server programs to upload a given file (“input.txt”) from c
 3. The sender transmits a new packet using the *same* channel on which it has received an ACK for its one of the previously transmitted packet. Note that, at a time, there can be at most *two* outstanding unacknowledged packets at the sender side.
 4. On the server-side, the packets transmitted through different channels may arrive *out of order*. In that case, the server has to buffer the packets temporarily to finally construct in-order data stream.
 
-## Instructions to Run
+### Instructions to Run
 
 - Open *two* terminals
 
@@ -25,7 +25,7 @@ Write client and server programs to upload a given file (“input.txt”) from c
     
 - Output is stored in the file *output.txt*.
 
-## Methodology
+### Methodology
 
 - Used select and fd_set to handle multiple connections as required (using only one timer).
 

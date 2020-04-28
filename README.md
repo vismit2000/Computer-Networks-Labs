@@ -1,17 +1,17 @@
-Contains the code of assignment submitted during the course Computer Networks (CS F303) at BITS Pilani, Pilani Campus
+Contains the code of assignment submitted during the course Computer Networks (CS F303) at BITS Pilani, Pilani Campus in Sem-II 2019-20
 
-# Problem-1: File transfer using multi-channel stop-and-wait protocol
+## Problem-1: File transfer using multi-channel stop-and-wait protocol
 
-## Problem Statement
+### Problem Statement
 
-Write client and server programs to upload a given file (“input.txt”) from client to the server using the given protocol by making **TCP** connections between the client and the server:
+Write client and server programs to *upload* a given file (“input.txt”) from client to the server using the given protocol by making **TCP** connections between the client and the server:
 
 1. The sender transmits packets through two *different* channels (TCP connections).
 2. The server acknowledges the receipt of a packet via the *same* channel through which the corresponding packet has been received.
 3. The sender transmits a new packet using the *same* channel on which it has received an ACK for its one of the previously transmitted packet. Note that, at a time, there can be at most *two* outstanding unacknowledged packets at the sender side.
 4. On the server-side, the packets transmitted through different channels may arrive *out of order*. In that case, the server has to buffer the packets temporarily to finally construct in-order data stream.
 
-## Instructions to Run
+### Instructions to Run
 
 - Open *two* terminals
 
@@ -27,7 +27,7 @@ Write client and server programs to upload a given file (“input.txt”) from c
     
 - Output is stored in the file *output.txt*.
 
-## Methodology
+### Methodology
 
 - Used select and fd_set to handle multiple connections as required (using only one timer).
 
@@ -61,76 +61,65 @@ Write client and server programs to upload a given file (“input.txt”) from c
     client has sent the data.
 
 
+## Problem-2: File transfer using Selective Repeat protocol over UDP
 
+### Problem Statement
 
+Write client and server programs to *upload* a given file (“input.txt”) from client to the server in a given scenario by implementing a reliable connection on top of **UDP** communication which uses **Selective Repeat** protocol. 
 
+![Problem2 _ Scenario](./Images/Problem2 _ Scenario.png?raw=true "Problem2 _ Scenario")
 
+C uploads *input.txt* to S. All odd-numbered packets go through the relay node R1, while all evennumbered packets go through the relay node R2. R1 and R2 add a delay, which is a random number distributed uniformly between 0 to 2 ms for a given packet. *Acknowledgments can take any route and do not suffer from delays or packet drops*.
 
+### Instructions to Run
 
+- Open *four* terminals
 
+- On first terminal **(server)**:
 
+    1. `gcc server.c -o server`
+    2. `./server`
 
+- On second terminal **(relay 1)**:
 
+    1. `gcc relay.c -lm -o relay`
+    2. `./relay 1`
 
+- On third terminal **(relay 2)**:
 
+    1. `gcc relay.c -lm -o relay`
+    2. `./relay 2`
 
-    /****************************************
-  Vishal Mittal        -   2017A7PS0080P
-*****************************************/
+- On fourth terminal **(client)**:
 
-## Instructions to Run
-
-- Open four terminals
-
-- On first terminal (server):
-
-    1. gcc server.c -o server
-    2. ./server
-
-- On second terminal (relay 1):
-
-    1. gcc relay.c -lm -o relay
-    2. ./relay 1
-
-- On third terminal (relay 2):
-
-    1. gcc relay.c -lm -o relay
-    2. ./relay 2
-
-- On fourth terminal (client):
-
-    1. gcc client.c -o client
-    2. ./client {inputfile.txt} 
-    (It takes the name of the input file as command line argument)
-
-    (e.g. If name of input file is "input.txt", run the following command:   ./client input.txt)     
+    1. `gcc client.c -o client`
+    2. `./client {inputfile.txt}` (It takes the name of the input file as command line argument)  
     
+- Output is stored in the file *output.txt*.
 
-- Output is stored in the file 'output.txt'.
+### Methodology
 
-
-
-
-## Methodology
+![Problem2 _ Working](./Images/Problem2 _ Working.png?raw=true "Problem2 _ Working")
 
 - Implemented a single timer per window basis
 
-- Used select and fd_set to handle multiple connections as required
+- Used select and fd_set to handle multiple connections.
 
 - Managing file transfer over multiple connections: 
 
-    - On the client side: Opened two sockets with different ports to establish two different UDP connections - one to relay 1 and other to relay2.
-    - Whenever timeout occurred, retransmit all unacknowledged packets in the window
-    - If there was no timeout, check which ACK was received correctly and mark the proper acknowledgement in window.
-    - Slide the window once all the packets in a window are acknowledged.
+    - On the client side: 
+        - Opened two sockets with different ports to establish two different UDP connections - one to relay 1 and the other to relay 2.
+        - Whenever timeout occurrs, retransmit all unacknowledged packets in the window
+        - If there was no timeout, check which ACK was received correctly and mark the proper acknowledgement in window.
+        - Slide the window once all the packets in a window are acknowledged.
 
     - On the server side: 
-        Used simple UDP send and receive to receive Data from corresponding Relay 1/2 and direct ACK to the same relay.
+        - Used simple UDP send and receive to receive *Data* from corresponding Relay 1/2 and direct *ACK* to the same relay.
 
 - Relay
     - Kept relay number as #define since implementation of both relay is exactly same.
     - Randomly drops pocket to cause timeout
-    - Causes a delay of randomly 0 to 2000 ms for each packet using system call nanosleep()
+    - Causes a delay of randomly 0 to 2000 ms for each packet using system call `nanosleep()`
     - Opens one socket to client and one to server
 
-- All the logs are stored in the file 'log_file.txt'
+- All the logs with *timestamp* are stored in the file *log_file.txt*

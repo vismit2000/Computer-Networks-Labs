@@ -1,6 +1,6 @@
-# Problem-2: File transfer using Selective Repeat protocol over UDP
+## Problem-2: File transfer using Selective Repeat protocol over UDP
 
-## Problem Statement
+### Problem Statement
 
 Write client and server programs to *upload* a given file (“input.txt”) from client to the server in a given scenario by implementing a reliable connection on top of **UDP** communication which uses **Selective Repeat** protocol. 
 
@@ -8,7 +8,7 @@ Write client and server programs to *upload* a given file (“input.txt”) from
 
 C uploads *input.txt* to S. All odd-numbered packets go through the relay node R1, while all evennumbered packets go through the relay node R2. R1 and R2 add a delay, which is a random number distributed uniformly between 0 to 2 ms for a given packet. *Acknowledgments can take any route and do not suffer from delays or packet drops*.
 
-## Instructions to Run
+### Instructions to Run
 
 - Open *four* terminals
 
@@ -34,7 +34,7 @@ C uploads *input.txt* to S. All odd-numbered packets go through the relay node R
     
 - Output is stored in the file *output.txt*.
 
-## Methodology
+### Methodology
 
 ![Problem2 _ Working](./../Images/Problem2 _ Working.png?raw=true "Problem2 _ Working")
 
