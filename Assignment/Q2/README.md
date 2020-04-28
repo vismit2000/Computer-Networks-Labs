@@ -4,7 +4,7 @@
 
 Write client and server programs to *upload* a given file (“input.txt”) from client to the server in a given scenario by implementing a reliable connection on top of **UDP** communication which uses **Selective Repeat** protocol. 
 
-![Problem2_Scenario](/../Images/Problem2_Scenario.png?raw=true "Problem2_Scenario")
+![Problem2_Scenario](./../Images/Problem2_Scenario.png?raw=true "Problem2_Scenario")
 
 C uploads *input.txt* to S. All odd-numbered packets go through the relay node R1, while all evennumbered packets go through the relay node R2. R1 and R2 add a delay, which is a random number distributed uniformly between 0 to 2 ms for a given packet. *Acknowledgments can take any route and do not suffer from delays or packet drops*.
 
@@ -36,7 +36,7 @@ C uploads *input.txt* to S. All odd-numbered packets go through the relay node R
 
 ### Methodology
 
-![Problem2_Working](/../Images/Problem2_Working.png?raw=true "Problem2_Working")
+![Problem2_Working](./../Images/Problem2_Working.png?raw=true "Problem2_Working")
 
 - Implemented a single timer per window basis
 
