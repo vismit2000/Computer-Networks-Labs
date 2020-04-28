@@ -47,10 +47,10 @@ Write client and server programs to *upload* a given file (“input.txt”) from
     - Data structure used for select: `fd_set`. It contains the list of file descriptors to monitor for some activity. There are four functions associated with fd_set:
         
         ```
-        int FD_ZERO (fd_set *descriptorVector);                     /* removes all descriptors from vector */
-        int FD_CLR (int descriptor, fd_set *descriptorVector);      /* remove descriptor from vector */
-        int FD_SET (int descriptor, fd_set *descriptorVector);      /* add descriptor to vector */
-        int FD_ISSET (int descriptor, fd_set *descriptorVector);    /* vector membership check */
+        int FD_ZERO (fd_set *descriptorVector);                   /* removes all descriptors from vector */
+        int FD_CLR (int descriptor, fd_set *descriptorVector);    /* remove descriptor from vector */
+        int FD_SET (int descriptor, fd_set *descriptorVector);    /* add descriptor to vector */
+        int FD_ISSET (int descriptor, fd_set *descriptorVector);  /* vector membership check */
         ```
 
     - Created a fd_set variable `readfds`, which will monitor all the active file descriptors of the clients plus that of the main server 
@@ -67,7 +67,7 @@ Write client and server programs to *upload* a given file (“input.txt”) from
 
 Write client and server programs to *upload* a given file (“input.txt”) from client to the server in a given scenario by implementing a reliable connection on top of **UDP** communication which uses **Selective Repeat** protocol. 
 
-![Problem2 _ Scenario](./Images/Problem2 _ Scenario.png?raw=true "Problem2 _ Scenario")
+![Problem2_Scenario](Images/Problem2_Scenario.png?raw=true "Problem2_Scenario")
 
 C uploads *input.txt* to S. All odd-numbered packets go through the relay node R1, while all evennumbered packets go through the relay node R2. R1 and R2 add a delay, which is a random number distributed uniformly between 0 to 2 ms for a given packet. *Acknowledgments can take any route and do not suffer from delays or packet drops*.
 
@@ -99,7 +99,7 @@ C uploads *input.txt* to S. All odd-numbered packets go through the relay node R
 
 ### Methodology
 
-![Problem2 _ Working](./Images/Problem2 _ Working.png?raw=true "Problem2 _ Working")
+![Problem2_Working](Images/Problem2_Working.png?raw=true "Problem2_Working")
 
 - Implemented a single timer per window basis
 
